@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Going Into Space with Shuttle</title>
+  <style>
+    /* Basic reset and background */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+      position: relative;
+      font-family: Arial, sans-serif;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      background: radial-gradient(circle at center, rgba(111, 0, 255, 0.1), transparent 70%);
+      z-index: 0;
+    }
+    #starfield {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      filter: drop-shadow(0 0 2px rgba(180, 180, 255, 0.6));
+    }
+
+    /* Shuttle container and image */
+    #shuttle-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 454px;  /* ~12cm */
+      height: 454px;
+      border-radius: 50%;
+      overflow: visible;
+      z-index: 10;
+      transition: border-radius 0.3s;
+    }
+    #shuttle {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      border-radius: inherit;
+      user-select: none;
+      pointer-events: none;
+    }
+    @media (max-width: 480px) {
+      #shuttle-container {
+        width: 220px;
+        height: 220px;
+      }
+      #slice-logo img {
+        width: 180px;
+      }
+    }
+
+    /* Small devices (larger phones, small tablets) */
+    @media (min-width: 481px) and (max-width: 768px) {
+      #shuttle-container {
+        width: 300px;
+        height: 300px;
+      }
+      #slice-logo img {
+        width: 260px;
+      }
+    }
+
+    /* Medium devices (tablets, small laptops) */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      #shuttle-container {
+        width: 380px;
+        height: 380px;
+      }
+      #slice-logo img {
+        width: 400px;
+      }
+    }
+
+    /* Large screens (desktops) */
+    @media (min-width: 1025px) and (max-width: 1440px) {
+      #shuttle-container {
+        width: 454px;
+        height: 454px;
+      }
+      #slice-logo img {
+        width: 530px;
+      }
+    }
+
+    /* Ultra-wide screens */
+    @media (min-width: 1441px) {
+      #shuttle-container {
+        width: 600px;
+        height: 600px;
+      }
+      #slice-logo img {
+        width: 700px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="starfield"></div>
+  <div id="shuttle-wrapper"></div>
+  <div id="shuttle-container">
+    <img id="shuttle" src="final_Shuttle.png" alt="Space Shuttle" />
+  </div>
+
+  <div id="slice-logo">
+  <img src="Logo/SLICE v25.png" alt="SLICE 2025 Logo" />
+</div>
+<style>
+  /* ... your existing CSS ... */
+
+  #slice-logo {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+    z-index: 200;
+    transition: opacity 1.5s ease, transform 1.8s ease;
+  }
+
+  #slice-logo img {
+    width: 530px;   /* Fixed pixel size */
+    max-width: 240vw; /* Responsive for smaller screens */
+    height: auto;
+  }
+</style>
+
+
+  <script src="script1.js"></script>
+
+</body>
+</html>

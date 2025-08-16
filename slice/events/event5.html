@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Astro Logiq </title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg,#e39a4b 0%,  #5d2b03 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #5d2b03;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color:#5d2b03 ;
+            font-family: "Exo 2", sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .cards-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: nowrap;
+        }
+
+        .info-card {
+            flex: 1;
+            min-width: 0;
+            background-color:#e39a4b ;
+            /* background: rgba(255, 255, 255, 0.95); */
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.2);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .event-name .card-icon {
+            background: linear-gradient(45deg,#5d2b03,#e39a4b );
+            color: white;
+        }
+
+        .poster .card-icon {
+            background: linear-gradient(45deg,#5d2b03,#e39a4b);
+            color: white;
+        }
+
+        .rounds .card-icon {
+            background: linear-gradient(45deg, #5d2b03,#e39a4b);
+            color: white;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #5d2b03;
+            margin-bottom: 10px;
+        }
+
+        .card-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .event-name .card-value {
+            color:#82001e;
+        }
+
+        .poster .card-value {
+            color: #82001e;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: underline;
+        }
+
+        .poster .card-value:hover {
+            color:#82001e;
+            transform: scale(1.05);
+        }
+
+        .rounds .card-value {
+            color: #82001e;
+        }
+
+        .content-card {
+            background-color: #e39a4b ;
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .content-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #5d2b03;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+         .content-title p{
+             font-family: "Exo 2", sans-serif;
+         }
+        .content-body {
+            color: #555;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .feature-item {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: #5d2b03;
+            margin-bottom: 8px;
+        }
+
+        .feature-desc {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .content-title p{
+             font-family: "Exo 2", sans-serif;
+        }
+
+        /* Modal styles for poster enlargement */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            background: #e39a4b;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .modal img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .modal img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .modal img {
+        max-width: 500px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+    .modal img {
+        max-width: 400px;
+    }
+}
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #666;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .cards-row {
+                flex-wrap: wrap;
+            }
+            
+            .info-card {
+                min-width: 280px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content-title {
+                font-size: 1.5rem;
+            }
+
+            .modal-content {
+                max-width: 95%;
+                max-height: 95%;
+                padding: 15px;
+            }
+        }
+        .card-value{
+            font-family: "Exo 2", sans-serif;
+        }
+        .content-body p{
+            font-family: "Exo 2", sans-serif;
+        }
+        .feature-desc p{
+            font-family: "Exo 2", sans-serif;
+        }
+        p{
+            font-family: "Exo 2", sans-serif;
+            color: #000;
+        }
+        .register-btn-container {
+  padding-top: 10px;
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+        
+.model-content p{
+    color: #000;
+}
+
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px 35px;
+    background: #ffffff;
+    font-size: 20px;
+    font-weight: 600;
+    color: #000000;
+    box-shadow: 0px 0px 10px 0px rgb(255, 255, 255);
+    border-radius: 100px;
+    border: none;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .star-1 {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 25px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 0.8s cubic-bezier(0.05, 0.83, 0.43, 0.96);
+  }
+  
+  .star-2 {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    width: 15px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
+  }
+  
+  .star-3 {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    width: 5px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
+  }
+  
+  .star-4 {
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    width: 8px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
+  }
+  
+  .star-5 {
+    position: absolute;
+    top: 25%;
+    left: 45%;
+    width: 15px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
+  }
+  
+  .star-6 {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    width: 5px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
+  }
+  
+  button:hover {
+    background: #5d2b03;
+    color: #ffffff;
+    box-shadow: 0 0 80px #ffffff8c;
+  }
+  
+  button:hover .star-1 {
+    position: absolute;
+    top: -20%;
+    left: -20%;
+    width: 20px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+  }
+  
+  button:hover .star-2 {
+    position: absolute;
+    top: 35%;
+    left: -25%;
+    width: 15px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+  }
+  
+  button:hover .star-3 {
+    position: absolute;
+    top: 80%;
+    left: -10%;
+    width: 10px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+  }
+  
+  button:hover .star-4 {
+    position: absolute;
+    top: -25%;
+    left: 105%;
+    width: 20px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+  }
+  
+  button:hover .star-5 {
+    position: absolute;
+    top: 30%;
+    left: 115%;
+    width: 15px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+  }
+  
+  button:hover .star-6 {
+    position: absolute;
+    top: 80%;
+    left: 105%;
+    width: 10px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+  }
+  
+  .fil0 {
+    fill: #fffdef;
+  }
+button a {
+    color: inherit;         
+    text-decoration: none;  
+}
+
+button a:visited {
+    color: inherit;        
+}
+
+button a:hover {
+    opacity: 0.85;          
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Astro Logiq</h1>
+            <p>Decode the Universe, One Gate at a Time</p>
+        </div>
+
+        <div class="cards-row">
+            <div class="info-card event-name">
+                <div class="card-icon">🎯</div>
+                <div class="card-title">Event Name</div>
+                <div class="card-value"> Astro Logiq</div>
+            </div>
+
+            <div class="info-card poster">
+                <div class="card-icon">📋</div>
+                <div class="card-title">Event Poster</div>
+                <div class="card-value" onclick="openModal()">Click to View</div>
+            </div>
+
+            <div class="info-card rounds">
+                <div class="card-icon">🏆</div>
+                <div class="card-title">No of Rounds</div>
+                <div class="card-value">2 Round</div>
+            </div>
+        </div>
+
+        <!-- Modal for poster -->
+        <div id="posterModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <img src="../img/events/ASTROLOGIQ.png" alt="Event Poster" id="posterImage">
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2 class="content-title">Description</h2>
+            <div class="content-body">
+                <p>ASTRO LOGIQ is an engaging digital logic maze challenge that tests participants’ ability to trace and solve logic gate sequences. Teams will analyze how outputs from one gate connect as inputs to the next, making logical decisions to navigate through the maze and reach the final output correctly.</p>
+                <h2 class="content-title">Flow of Event</h2>
+                <p>🪐Round 1: Signal Uplink (Logic Maze) </p>
+                <p>Teams start with given binary inputs (e.g., 0 and 1).</p>
+                <p>They are presented with a series of logic gates arranged like a maze.</p>
+                <p>Each step involves applying the gate’s logic to current inputs and moving forward based on the result.</p> 
+                <p>If a gate requires two inputs but only one output is available from the previous gate, teams must decide how to provide the second input (e.g., reuse original inputs or choose another path).</p>
+                <p>Teams record the output after each gate until reaching the maze end.</p> 
+                <p>Correct final output scores points; faster completion gains bonus points.</p> 
+                <p>Inputs: A = 0, B = 1</p>
+                <p>Gate 1: AND gate → Output = 0 AND 1 = 0</p>
+                <p>Gate 2: OR gate requires two inputs. Previous output is 0 (single input). Second input taken as B = 1 (original input).</p>
+                <p>Output of Gate 2: 0 OR 1 = 1</p>
+                <br>
+                <p>🪐Round 2: Orbital Auction (Logic Auction)</p> 
+                <p>Teams receive a real-world logic problem to solve. </p>
+                <p>They discuss and plan the Boolean expression within a limited time.</p>
+                <p>Gates are auctioned; teams use points to bid and buy gates.</p>
+                <p>Teams build the circuit using only gates they purchased.</p>
+                <p>Correctness and cost efficiency are evaluated.</p>
+                
+                
+
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-title">Contact</div>
+                    <div class="feature-desc">+91 9176334470</div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">👥</div>
+                    <div class="feature-title">Event Coordinators</div>
+                    <div class="feature-desc">Harini JS<br>Bala Mani Bharathi A<br>Jagadeeshwaran M </div>
+                </div>
+            </div>
+
+<div class="register-btn-container">
+  <button>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSenQDNZ2I51vD8Ohyj0ytLwAIxw5GhNUY7WmZ2LJ7CnfSzbkg/viewform?usp=dialog">
+  Register Now
+</a>
+
+    <div class="star-1">
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 784.11 815.53"
+        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        version="1.1"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs></defs>
+        <g id="Layer_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+          <path
+            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+            class="fil0"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="star-2">
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 784.11 815.53"
+        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        version="1.1"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs></defs>
+        <g id="Layer_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+          <path
+            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+            class="fil0"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="star-3">
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 784.11 815.53"
+        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        version="1.1"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs></defs>
+        <g id="Layer_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+          <path
+            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+            class="fil0"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="star-4">
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 784.11 815.53"
+        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        version="1.1"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs></defs>
+        <g id="Layer_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+          <path
+            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+            class="fil0"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="star-5">
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 784.11 815.53"
+        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        version="1.1"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs></defs>
+        <g id="Layer_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+          <path
+            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+            class="fil0"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="star-6">
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 784.11 815.53"
+        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        version="1.1"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs></defs>
+        <g id="Layer_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+          <path
+            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+            class="fil0"
+          ></path>
+        </g>
+      </svg>
+    </div>
+  </button>
+</div>
+            
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('posterModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('posterModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('posterModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

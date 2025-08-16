@@ -1,0 +1,134 @@
+@import url('https://fonts.cdnfonts.com/css/ica-rubrik-black');
+@import url('https://fonts.cdnfonts.com/css/poppins');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fullscreen Background Video */
+#bg-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: -1;
+    background-color: black; /* fallback color */
+}
+
+
+
+/* Banner */
+.banner {
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Slider */
+.banner .slider {
+    position: absolute;
+    width: 140px;
+    height: 180px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) perspective(1000px);
+    transform-style: preserve-3d;
+    animation: autoRun 50s linear infinite;
+    z-index: 2;
+}
+
+@keyframes autoRun {
+    from { transform: translate(-50%, -50%) perspective(1000px) rotateY(0deg); }
+    to { transform: translate(-50%, -50%) perspective(1000px) rotateY(360deg); }
+}
+
+.banner .slider .item {
+    position: absolute;
+    inset: 0;
+    transform:
+        rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+        translateZ(550px);
+}
+
+.banner .slider .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.banner .slider .item img:hover {
+    transform: scale(1.2);
+}
+.heading{
+    display: flex;
+    color: rgb(167, 45, 201);
+    text-shadow: cyan;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Orbitron', sans-serif;
+   
+}
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('img/back.jpg') center center / cover no-repeat;
+    opacity: 0.3; /* transparency so video shows through */
+    z-index: -1; /* above video but below content */
+}
+
+/* Slider or other content will be above both */
+.banner {
+    position: relative;
+    z-index: 1;
+}
+
+/* Responsive */
+@media screen and (max-width: 1023px) {
+    .banner .slider {
+        width: 260px;
+        height: 260px;
+    }
+    .banner .slider .item {
+        transform:
+            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+            translateZ(700px);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .banner .slider {
+        width: 100px;
+        height: 150px;
+    }
+    .banner .slider .item {
+        transform:
+            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+            translateZ(180px);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #bg-video {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        min-width: unset;
+        min-height: unset;
+        transform: translate(-50%, -50%);
+    }
+}

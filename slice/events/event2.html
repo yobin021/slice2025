@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper Presentation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, #75e2e0 0%, #024d60 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #1c4ea7;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #1c4ea7;
+            font-family: "Exo 2", sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .cards-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: nowrap;
+        }
+
+        .info-card {
+            flex: 1;
+            min-width: 0;
+            background-color: #d9f5f0;
+            /* background: rgba(255, 255, 255, 0.95); */
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.2);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .event-name .card-icon {
+            background: linear-gradient(45deg, #75e2e0, #2cacad);
+            color: white;
+        }
+
+        .poster .card-icon {
+            background: linear-gradient(45deg, #75e2e0, #2cacad);
+            color: white;
+        }
+
+        .rounds .card-icon {
+            background: linear-gradient(45deg, #75e2e0, #2cacad);
+            color: white;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1c4ea7;
+            margin-bottom: 10px;
+        }
+
+        .card-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .event-name .card-value {
+            color: #024d60;
+        }
+
+        .poster .card-value {
+            color: #024d60;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: underline;
+        }
+
+        .poster .card-value:hover {
+            color: #1c4ea7;
+            transform: scale(1.05);
+        }
+
+        .rounds .card-value {
+            color: #024d60;
+        }
+
+        .content-card {
+            background-color: #d9f5f0;
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .content-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #203864;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+         .content-title p{
+             font-family: "Exo 2", sans-serif;
+         }
+        .content-body {
+            color: #555;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .feature-item {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: #203864;
+            margin-bottom: 8px;
+        }
+
+        .feature-desc {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .content-title p{
+             font-family: "Exo 2", sans-serif;
+        }
+
+        /* Modal styles for poster enlargement */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+       
+        .modal img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .modal img {
+        max-width: 500px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+    .modal img {
+        max-width: 400px;
+    }
+}
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #666;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .cards-row {
+                flex-wrap: wrap;
+            }
+            
+            .info-card {
+                min-width: 280px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content-title {
+                font-size: 1.5rem;
+            }
+
+            .modal-content {
+                max-width: 95%;
+                max-height: 95%;
+                padding: 15px;
+            }
+        }
+        .card-value{
+            font-family: "Exo 2", sans-serif;
+        }
+        .content-body p{
+            font-family: "Exo 2", sans-serif;
+        }
+        .feature-desc p{
+            font-family: "Exo 2", sans-serif;
+        }
+        p{
+            font-family: "Exo 2", sans-serif;
+        }
+        .register-btn-container {
+  padding-top: 10px;
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px 35px;
+    background: #ffffff;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1c4ea7;
+    box-shadow: 0px 0px 10px 0px rgb(255, 255, 255);
+    border-radius: 100px;
+    border: none;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .star-1 {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 25px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 0.8s cubic-bezier(0.05, 0.83, 0.43, 0.96);
+  }
+  
+  .star-2 {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    width: 15px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
+  }
+  
+  .star-3 {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    width: 5px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
+  }
+  
+  .star-4 {
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    width: 8px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
+  }
+  
+  .star-5 {
+    position: absolute;
+    top: 25%;
+    left: 45%;
+    width: 15px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
+  }
+  
+  .star-6 {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    width: 5px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
+  }
+  
+  button:hover {
+    background: #75e2e0;
+    color: #ffffff;
+    box-shadow: 0 0 80px #ffffff8c;
+  }
+  
+  button:hover .star-1 {
+    position: absolute;
+    top: -20%;
+    left: -20%;
+    width: 20px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+  }
+  
+  button:hover .star-2 {
+    position: absolute;
+    top: 35%;
+    left: -25%;
+    width: 15px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+  }
+  
+  button:hover .star-3 {
+    position: absolute;
+    top: 80%;
+    left: -10%;
+    width: 10px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+  }
+  
+  button:hover .star-4 {
+    position: absolute;
+    top: -25%;
+    left: 105%;
+    width: 20px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+  }
+  
+  button:hover .star-5 {
+    position: absolute;
+    top: 30%;
+    left: 115%;
+    width: 15px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+  }
+  
+  button:hover .star-6 {
+    position: absolute;
+    top: 80%;
+    left: 105%;
+    width: 10px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+  }
+  
+  .fil0 {
+    fill: #fffdef;
+  }
+button a {
+    color: inherit;         
+    text-decoration: none;  
+}
+
+button a:visited {
+    color: inherit;        
+}
+
+button a:hover {
+    opacity: 0.85;          
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Paper Presentation</h1>
+            <p>Where Ideas Beat with Innovation.</p>
+        </div>
+
+        <div class="cards-row">
+            <div class="info-card event-name">
+                <div class="card-icon">🎯</div>
+                <div class="card-title">Event Name</div>
+                <div class="card-value">Paper Presentation</div>
+            </div>
+
+            <div class="info-card poster">
+                <div class="card-icon">📋</div>
+                <div class="card-title">Event Poster</div>
+                <div class="card-value" onclick="openModal()">Click to View</div>
+            </div>
+
+            <div class="info-card rounds">
+                <div class="card-icon">🏆</div>
+                <div class="card-title">No of Rounds</div>
+                <div class="card-value">1 Round</div>
+            </div>
+        </div>
+
+        <!-- Modal for poster -->
+        <div id="posterModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <img src="../img/events/Paper Presentation.png" alt="Event Poster" id="posterImage">
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2 class="content-title">Description</h2>
+            <div class="content-body">
+                <p>Welcome to Paper Presentation, the ultimate platform to showcase your innovative research and project ideas. This event empowers participants to present their academic and technical insights, setting the stage for breakthroughs in technology, science, and engineering.Here, every paper reflects the pulse of a future-ready mind.</p>
+                <p>Themes:</p>
+                <p>Participants must select any one theme for their paper presentation:</p>
+                <p>💡Artificial Intelligence & Machine Learning</p>
+                <p>💡Internet of Things (IoT) & Embedded Systems</p>
+                <p>💡Robotics & Automation</p>
+                <p>💡Renewable Energy & Sustainability</p>
+                <p>💡VLSI & Semiconductor Technology</p>
+                <p>💡Cybersecurity & Blockchain</p>
+                <p>💡Communication Systems & 5G Technology</p>
+                <p>💡Biomedical Engineering & Healthcare Tech</p>
+                <p>Registration:</p>
+                <p>•Registration will be online only – No on-spot registrations.</p>
+                <p>•Registration closes on 21st August 2025 for the symposium scheduled on 23rd August 2025.</p>
+                <p>•Teams must upload their PPT in the registration form itself.</p>
+                <p>•Shortlisted teams will be intimated via email.</p>
+                <p>•Submission Guidelines: Submit complete paper, abstract, PowerPoint presentation, and required documents via Google Form 📊 by August 21, 2025</p>
+                <p>Rules:</p>
+                <p>•Team Size: 1–3 members per team</p>
+                <p>•Time Limit: 8 minutes per team (6 minutes for presentation + 2 minutes for Q&A)</p>
+                <p>•Theme Adherence: Stick to the theme or domain shared during registration</p>
+                <p>•Plagiarism: Original work only — copied content will lead to disqualification</p>
+                <p>•Device Usage: Bring your own laptop if necessary</p>
+                <p>•Specifications:<br>>IEEE format<br>Abstracts: 250 words max<br>Papers: 6-15 pages<br>PPT</p>
+                <h2 class="content-title">Flow of Event</h2>
+                <p>📜Each team will present their paper/project based on prior research, journal, or original work.</p>
+                <p>📜A maximum of 8 minutes will be allotted per team, including 2 minutes for live Q&A.</p>
+                <p>📜Judges will evaluate based on specific criteria and select the top performers.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-title">Contact</div>
+                    <div class="feature-desc">9486409404<br>9445543926</div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">👥</div>
+                    <div class="feature-title">Event Coordinators</div>
+                    <div class="feature-desc">Jenlin Anne Flora<br>Jayaharini B</div>
+                </div>
+            </div>
+
+<div class="register-btn-container">
+  <button>
+    <a href="https://forms.gle/DF6jgCsQJ1KXRxmz6">
+  Register Now
+</a>
+
+    <div class="star-1">
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 784.11 815.53"
+        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        version="1.1"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs></defs>
+        <g id="Layer_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+          <path
+            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+            class="fil0"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="star-2">
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 784.11 815.53"
+        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        version="1.1"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs></defs>
+        <g id="Layer_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+          <path
+            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+            class="fil0"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="star-3">
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 784.11 815.53"
+        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        version="1.1"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs></defs>
+        <g id="Layer_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+          <path
+            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+            class="fil0"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="star-4">
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 784.11 815.53"
+        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        version="1.1"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs></defs>
+        <g id="Layer_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+          <path
+            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+            class="fil0"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="star-5">
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 784.11 815.53"
+        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        version="1.1"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs></defs>
+        <g id="Layer_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+          <path
+            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+            class="fil0"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="star-6">
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 784.11 815.53"
+        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        version="1.1"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs></defs>
+        <g id="Layer_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+          <path
+            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+            class="fil0"
+          ></path>
+        </g>
+      </svg>
+    </div>
+  </button>
+</div>
+            
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('posterModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('posterModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('posterModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

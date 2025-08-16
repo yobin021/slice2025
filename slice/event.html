@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVENT</title>
+    <link rel="stylesheet" href="./event_style.css">
+</head>
+<body>
+
+    <!-- Fullscreen Background Video -->
+    <video id="bg-video" autoplay muted loop playsinline>
+        <source src="./img/Astronaut Animated Video.mp4 " type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+    
+    <div class="background-overlay"></div>
+    <div class="heading">
+        <h1>Note: Click the poster to view the event details. </h1>
+    </div>
+
+    <!-- Rotating Event Slider -->
+    <div class="banner">
+        <div class="slider" style="--quantity: 10">
+            <div class="item" style="--position: 1"><a href="./events/event1.html"><img src="img/events/CODEX.png" alt=""></a></div>
+            <div class="item" style="--position: 2"><a href="./events/event2.html"><img src="img/events/Paper Presentation.png" alt=""></a></div>
+            <div class="item" style="--position: 3"><a href="./events/event3.html"><img src="img/events/Byte The Bomb.png" alt=""></a></div>
+            <div class="item" style="--position: 4"><a href="./events/event4.html"><img src="img/events/Cipher Odyssey.png" alt=""></a></div>
+            <div class="item" style="--position: 5"><a href="./events/event5.html"><img src="img/events/ASTROLOGIQ.png" alt=""></a></div>
+            <div class="item" style="--position: 6"><a href="./events/event6.html"><img src="img/events/COSMO CONNECT.png" alt=""></a></div>
+            <div class="item" style="--position: 7"><a href="./events/event7.html"><img src="img/events/LUNAR LAUNCH.png" alt=""></a></div>
+            <div class="item" style="--position: 8"><a href="./events/event8.html"><img src="img/events/STELLAR_QUEST.png" alt=""></a></div>
+            <div class="item" style="--position: 9"><a href="./events/event9.html"><img src="img/events/WIRE_WARZ.png" alt=""></a></div>
+            <div class="item" style="--position: 10"><a href="./events/event10.html"><img src="img/events/Bingo- Nauts.png" alt=""></a></div>
+        </div>
+    </div>
+    <script type="module" src="app.js"></script> 
+<script>
+function adjustLayout() {
+    const slider = document.querySelector('.slider');
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth < 768) {
+        // Mobile
+        slider.style.width = "100px";
+        slider.style.height = "150px";
+    } 
+    else if (screenWidth < 1024) {
+        // Tablet
+        slider.style.width = "140px";
+        slider.style.height = "200px";
+    } 
+    else {
+        // Desktop
+        slider.style.width = "200px";
+        slider.style.height = "260px";
+    }
+}
+
+// Run once when the page loads
+adjustLayout();
+
+// Run whenever the window is resized
+window.addEventListener('resize', adjustLayout);
+</script>
+
+</body>
+</html>

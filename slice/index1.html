@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SLICE 2K25</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:,">
+  <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@v0.163.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@v0.163.0/examples/jsm/"
+        }
+      }
+    </script>
+</head>
+
+<body>
+
+  <script>
+    let targetDate = new Date("August 23, 2025 09:00:00").getTime();
+    let timer = setInterval(function() {
+      let now = new Date().getTime();
+      let distance = targetDate - now;
+
+      let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+
+      if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById("countdown").innerHTML = "Time's up!";
+      }
+    }, 1000);
+  </script>
+
+  <div class="background" id="first">
+    <header>
+      <div class="content-fit">
+        <div class="logo">SLICE 2K25</div>
+        <nav>
+          <ul>
+            <li><a href="./index1.html">Home</a></li>
+            <li><a href="./event.html">Events</a></li>
+            <button id="muteBtn">🔊 Mute</button>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="section first" id="intro">
+      <div data-aos="zoom-out-up" class="number">
+        <img class="licet_logo" src="./img/licet_logo.png" alt="licet" />
+        <div>
+          <h1>Loyola-ICAM College of Engineering and Technology(LICET) </h1>
+          <center><h1>(AUTONOMOUS)</h1></center>
+          
+          <p class="heading">Loyola Campus, Nungambakkam, Chennai, Tamil Nadu, India, 600034</p>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="department" data-aos="flip-up">
+      <h1>DEPARTMENT OF ELECTRONICS AND COMMUNICATION ENGINEERING</h1>
+      <br>
+      <h3>PRESENTS</h3><br>
+      <img class="slice_logo" src="./Logo/SLICE v25.png" alt="slice" />
+      <p class="symposisum">National Level Technical Symposium</p>
+    </div>
+
+    <div id="countdown"></div>
+
+    <div id="countdown2"></div>
+
+    <div class="container">
+    <div class="item">
+    <div class="icon">📅</div>
+    <div class="label">Date</div>
+    <div class="value">23rd August 2025</div>
+    </div>
+
+    <div class="item">
+    <div class="icon">📍</div>
+    <div class="label">Venue</div>
+    <div class="value"><a href="https://www.google.com/maps/place/LICET+:+Loyola-ICAM+College+of+Engineering+and+Technology/@13.056449,80.2378238,17z/data=!4m6!3m5!1s0x3a5266606a8d51eb:0xcfedaad4ca5bd750!8m2!3d13.0592975!4d80.2336586!16s%2Fm%2F0dlk73f?entry=ttu&g_ep=EgoyMDI1MDgwNi4wIKXMDSoASAFQAw%3D%3D"
+         target="_blank"
+         style="text-decoration: none; color: inherit;">
+        LICET
+      </a></div>
+    </div>
+    </div>
+
+
+    <div class="register-btn-container">
+    <button>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSenQDNZ2I51vD8Ohyj0ytLwAIxw5GhNUY7WmZ2LJ7CnfSzbkg/viewform?usp=dialog">
+    Register Now
+    </a>
+
+    <div class="star-1">
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 784.11 815.53"
+        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        version="1.1"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs></defs>
+        <g id="Layer_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+          <path
+            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+            class="fil0"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="star-2">
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 784.11 815.53"
+        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        version="1.1"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs></defs>
+        <g id="Layer_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+          <path
+            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+            class="fil0"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="star-3">
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 784.11 815.53"
+        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        version="1.1"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs></defs>
+        <g id="Layer_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+          <path
+            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+            class="fil0"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="star-4">
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 784.11 815.53"
+        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        version="1.1"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs></defs>
+        <g id="Layer_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+          <path
+            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+            class="fil0"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="star-5">
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 784.11 815.53"
+        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        version="1.1"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs></defs>
+        <g id="Layer_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+          <path
+            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+            class="fil0"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="star-6">
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 784.11 815.53"
+        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        version="1.1"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs></defs>
+        <g id="Layer_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+          <path
+            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+            class="fil0"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    </button>
+  </div>
+
+
+<div class="section third" id="intro">
+  <div class="content-fit">
+    <div data-aos="fade-right" class="number">
+      <img class="slice_poster" src="./Logo/LICET.png" alt="slice_logo" />
+    </div>
+    <div data-aos="fade-left" class="des">
+      <h2>Welcome to LICET</h2>
+      <p>Loyola-ICAM College of Engineering and Technology (LICET) is a Christian institution founded in 2010 by the Jesuits and is located in Nungambakkam. In 2009, Loyola college, Chennai and the Institut Catholique d’Arts et Metiers (ICAM), founded in 1898 in Lille, France entered a joint venture to build an engineering college in Chennai which aims at training young men and women of quality to be leaders in all walks of life and serve their fellowmen with justice, truth and love. LICET has always lived up to its motto, “Let Your Light Shine”, by setting up many luminaries in the world.</p>
+    </div>
+  </div>
+</div>
+
+<div class="background2">
+<div class="content">
+<div class="section second" id="intro">
+    <div class="content-fit">
+      <div  data-aos="fade-up-left" class="number">
+        <img class="sea" src="./Logo/SEA.png" alt="sea_logo" />
+      </div>
+      <div data-aos="fade-up-right" class="des">
+        <h1>Welcome to ECE Department </h1><br>
+        <p>Electronics and Communication Engineering is one of the most sought after branches in LICET. Our students have collaborated with abroad universities for their final year projects and many students have traveled to the University of Heilbronn, Germany and Comilas Pontifical University, Spain for their project work. The excellent performance of its alumni across the globe has enabled the department to maintain its strong reputation. Its alumni include entrepreneurs, teaching professionals, managers, scientists and administrators at various levels in their respective fields.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section third" id="intro">
+    <div class="content-fit">
+      <div data-aos="fade-right" class="number">
+        <img class="slice_poster" src="./img/SLICE v25.png" alt="slice_logo" />
+      </div>
+      <div data-aos="fade-left" class="des">
+        <h1>Welcome to SLICE 2025 </h1><br>
+        <h2>National Level Technical Symposium</h2>
+        <p>"Fortune favours the bold " but we as Electronics and Communication department students disagree, it is the opportunists does the fortune favour, so never shy away from challenges and here is your moment to seize your place and to test your limits! With great pleasure and pride , here we are to announce the Electronics and Communication department's National Level Technical Symposium - SLICE 2025. So Folks ! Gear up to join the Symposium, an event beyond Innovation. Come join us on 23th August and reap the benefits of being a participant in our Symposium.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="register-btn-container">
+  <button>
+    <a href="event.html">Explore Events</a>
+  </button>
+</div>
+<div class="footer">
+<div class="third"  id="General">
+<div class=" guideline" data-aos="zoom-in" >
+  <h2>General Guidelines</h2>
+  <p>• Participants are requested to wear their college ID cards at all times while on the premises.</p>
+  <p>• The event is scheduled to commence at 9:30 AM on August 23, 2025.</p>
+  <p>• Boys are requested to wear collared shirts and T-shirts. Torn Jeans and tight t- shirts are not encouraged ,   Girls are requested not to wear crop tops</p>
+  <p>• Misconduct within the Campus is discouraged.</p>
+  <p>• For any updates and information please  contact our student coordinators.</p>
+</div>
+</div>
+
+<div class="fourth" id="contanct">
+  <div class="staff student">
+    <h2>Contacts</h2>
+    <h5>Staff Co-ordinator</h5>
+    <p>Mr Augustine  AP ECE</p>
+    <p>9994019794</p>
+    <h5>Student Co-ordinator</h5>
+    <p>John Arokia Xavier X</p>
+    <p>+91 9444890566</p>
+    <h5>Student Co-ordinator</h5>
+    <p>Jinisha Sagaya Princy P</p>
+    <p>jinishasagayaprincy.27ec@licet.ac.in</p>
+  </div>
+</div>
+</div>
+
+
+<audio id="bgMusic" loop autoplay>
+  <source src="./docking.mp3" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>
+
+<footer class="purple-footer">
+  <div class="social-container">
+    <a href="https://www.instagram.com/slice_ece/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
+    <!-- <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a> -->
+  </div>
+  <h1>Media Query Contact</h1>
+  <p>Yobin S - +91 9361572363</p>
+  <p>Roopesh - +91 9444723354</p>
+</footer>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+
+<script>
+const music = document.getElementById("bgMusic");
+const muteBtn = document.getElementById("muteBtn");
+
+// Enable autoplay after user interaction
+document.addEventListener("click", () => {
+  if (music.paused) music.play().catch(() => {});
+}, { once: true });
+
+muteBtn.addEventListener("click", () => {
+  music.muted = !music.muted;
+  muteBtn.textContent = music.muted ? "🔈 Unmute" : "🔊 Mute";
+});
+
+</script>
+
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+  </script>
+</body>
+<div id="container3D"></div>
+<script type="module" src="app.js"></script> 
+
+</html>
+
