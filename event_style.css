@@ -73,8 +73,9 @@
 }
 .heading{
     display: flex;
-    color: rgb(167, 45, 201);
-    text-shadow: cyan;
+    color:#00FFFF;
+    margin:30px;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff;
     justify-content: center;
     align-items: center;
     font-family: 'Orbitron', sans-serif;
@@ -95,6 +96,9 @@
 .banner {
     position: relative;
     z-index: 1;
+}
+h1{
+     font-family: 'Orbitron', sans-serif;
 }
 
 /* Responsive */

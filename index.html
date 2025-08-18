@@ -2,108 +2,137 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Video Intro</title>
+  <!-- Preload assets for index.html -->
+<link rel="preload" href="index.html" as="document">
+<link rel="preload" href="styles.css" as="style">
+<link rel="preload" href="script1.js" as="script">
+<link rel="preload" href="final_Shuttle.png" as="image">
+<link rel="preload" href="Logo/SLICE v25.png" as="image">
+
+<!-- Preload assets for index1.html (landing page) -->
+<link rel="preload" href="index1.html" as="document">
+<link rel="preload" href="style.css" as="style">
+
+
+  <title>Slice v25</title>
+  <link rel="icon" type="image/png" href="./img/licet_logo.png">
   <style>
-    body {
-      margin: 0;
-      background: black;
-      overflow: hidden;
-    }
+  body {
+    margin: 0;
+    background: black;
+    overflow: hidden;
+  }
+
+  #introVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* If the phone is in portrait, rotate the video to landscape */
+  @media screen and (orientation: portrait) {
     #introVideo {
-      width: 100%;
-      height: 100%;
+      transform: rotate(90deg);
+      transform-origin: center center;
+      width: 100vh;  /* swap width/height */
+      height: 100vw;
       object-fit: cover;
     }
-    #skipButton, #muteButton {
-      position: absolute;
-      padding: 10px 20px;
-      font-size: 16px;
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      z-index: 10;
-    }
-    #skipButton {
-      top: 20px;
-      right: 20px;
-    }
-    #muteButton {
-      bottom: 20px;
-      right: 20px;
-    }
-    #fadeOverlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: black;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 1s ease;
-      z-index: 999;
-    }
-    #fadeOverlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-@media (max-width: 1024px) {
-    #introVideo {
-      height: auto;
-      min-height: 100%;
-    }
-    #skipButton, #muteButton {
-      font-size: 14px;
-      padding: 8px 16px;
-    }
   }
 
-  /* Large Phones */
-  @media (max-width: 768px) {
-    #introVideo {
-      height: auto;
-      min-height: 100%;
-    }
-    #skipButton, #muteButton {
-      font-size: 13px;
-      padding: 7px 14px;
-    }
+  #skipButton, #muteButton {
+    position: absolute;
+    padding: 10px 20px;
+    font-size: 16px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 10;
   }
+  #skipButton {
+    top: 20px;
+    right: 20px;
+  }
+  #muteButton {
+    bottom: 20px;
+    right: 20px;
+  }
+  #fadeOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease;
+    z-index: 999;
+  }
+  #fadeOverlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  overflow: hidden;
+}
 
-  /* Small Phones */
-  @media (max-width: 480px) {
-    #introVideo {
-      height: auto;
-      min-height: 100%;
-    }
-    #skipButton, #muteButton {
-      font-size: 12px;
-      padding: 6px 12px;
-    }
-    #skipButton {
-      top: 10px;
-      right: 10px;
-    }
-    #muteButton {
-      bottom: 10px;
-      right: 10px;
-    }
-  }
+#introVideo {
+  position: fixed; /* make it cover screen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* crop/zoom but fills screen */
+}
 
-  /* Very Small Devices (e.g., Smartwatches) */
-  @media (max-width: 320px) {
-    #introVideo {
-      height: auto;
-      min-height: 100%;
-    }
-    #skipButton, #muteButton {
-      font-size: 10px;
-      padding: 4px 8px;
-    }
+/* Portrait fix */
+@media screen and (orientation: portrait) {
+  #introVideo {
+    transform: rotate(90deg);
+    top: 27%;
+    left: -58%;
+    transform-origin: center center;
+    width: 100vh;  
+    height: 100vw;
+    object-fit: cover;
   }
-  </style>
+}
+/* Applies to all mobile screens */
+@media screen and (max-width: 768px) {
+  #introVideo {
+    transform: rotate(90deg);
+    top: 27%;
+    left: -58%;
+    transform-origin: center center;
+    width: 100vh;  
+    height: 100vw;
+    object-fit: cover;
+  }
+}
+
+/* If you specifically want portrait mobiles */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  #introVideo {
+    transform: rotate(90deg);
+    top: 27%;
+    left: -58%;
+    transform-origin: center center;
+    width: 100vh;  
+    height: 100vw;
+    object-fit: cover;
+  }
+}
+
+</style>
+
 </head>
 <body>
 
@@ -132,7 +161,7 @@
     function redirectToMain() {
       fadeOverlay.classList.add('active');
       setTimeout(() => {
-        window.location.href = 'home.html';
+        window.location.href = 'index1.html';
       }, 1000);
     }
 

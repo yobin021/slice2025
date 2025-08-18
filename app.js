@@ -32,7 +32,7 @@ loader.load("./models/intersteller_endurance.glb",
   function (gltf) {
     endurance = gltf.scene;
     endurance.scale.set(0.01, 0.01, 0.01);
-    endurance.position.set(1.5, -0.5, 0); // Place it somewhere else so it’s not overlapping
+    endurance.position.set(1.8, -0.5, 0); // Place it somewhere else so it’s not overlapping
     endurance.rotation.set(0, Math.PI / 4, 0);
     scene.add(endurance);
   }
