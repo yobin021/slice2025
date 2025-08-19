@@ -74,7 +74,7 @@
 .heading{
     display: flex;
     color:#00FFFF;
-    margin:30px;
+    margin:15px;
     text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff;
     justify-content: center;
     align-items: center;

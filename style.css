@@ -414,7 +414,9 @@ button:hover {
 .symposisum{
   font-size: xx-large ;
 }
-
+.section .des p{
+  text-align: justify;
+}
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
